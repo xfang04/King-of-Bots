@@ -15,6 +15,7 @@ export class Wall extends AcGameObject {
   }
 
   render() {
+    // 动态取出gamemap，因为可能随着窗口大小变化而变化
     const L = this.gamemap.L;
     const ctx = this.gamemap.ctx;
 
