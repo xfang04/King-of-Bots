@@ -12,6 +12,22 @@ export default {
   components: {
     NavBar,
   },
+  setup() {
+    // $.ajax({
+    //   url: "http://localhost:3000/user/account/token/",
+    //   type: "post",
+    //   data: {
+    //     username: "xfang",
+    //     password: "19960830",
+    //   },
+    //   success(resp) {
+    //     console.log(resp);
+    //   },
+    //   error(err) {
+    //     console.log(err);
+    //   },
+    // });
+  },
 };
 </script>
 
