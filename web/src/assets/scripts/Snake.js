@@ -10,7 +10,7 @@ export class Snake extends AcGameObject {
     this.gamemap = gamemap;
     // 蛇的身体，cells[0]是蛇头
     this.cells = [new Cell(info.r, info.c)];
-
+    this.next_cell = null; // 下一步的目标位置
     this.speed = 5; // 蛇每秒走多少个格子
     this.direction = -1; // -1表示没有指令，0、1、2、3表示上右下左
     this.status = "idle"; // idle表示静止，move表示正在移动，die表示死亡
@@ -69,11 +69,6 @@ export class Snake extends AcGameObject {
     for (let i = k; i > 0; i--) {
       this.cells[i] = JSON.parse(JSON.stringify(this.cells[i - 1]));
     }
-
-    if (!this.gamemap.check_valid(this.next_cell)) {
-      // 下一步操作撞了，蛇瞬间去世
-      this.status = "die";
-    }
   }
 
   update_move() {
@@ -109,7 +104,11 @@ export class Snake extends AcGameObject {
   }
 
   update() {
-    if (this.status === "move") this.update_move();
+    // 每一帧执行一次
+    if (this.status === "move") {
+      this.update_move();
+    }
+
     this.render();
   }
 
@@ -119,7 +118,9 @@ export class Snake extends AcGameObject {
     const ratio = 0.8;
 
     ctx.fillStyle = this.color;
-    if (this.status === "die") ctx.fillStyle = "white";
+    if (this.status === "die") {
+      ctx.fillStyle = "white";
+    }
 
     for (const cell of this.cells) {
       ctx.beginPath();
